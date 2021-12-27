@@ -57,9 +57,9 @@ export default {
       this.$store.dispatch('toggleSideBar')
     },
     getAvatar(avatar) {
-      if (avatar) {
+      if (!avatar) {
         return this.previewAvatar + avatar
-      } else if (avatar.trim().startsWith("http")) {
+      } else if (avatar.trim().startsWith("https")) {
         return avatar
       } else {
         return defaultAvatar

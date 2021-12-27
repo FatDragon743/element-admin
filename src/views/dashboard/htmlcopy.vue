@@ -1,42 +1,34 @@
 <template>
-  <el-row :gutter="20">
+  <div>
+    <hr width="90%" color="blue" size="3">
     <h2>contractProcessStep_item:{{ index + 1 }}</h2>
-    <el-col :span="6">
-      <font class="tag">step_type: </font>
-      <el-select v-model="step_type" placeholder="step_type" >
-        <el-option
-          v-for="i in options1"
-          :key="i.value"
-          :label="i.label"
-          :value="i.value"
-        >
-        </el-option>
-      </el-select>
-    </el-col>
-    <el-col :span="6">
-      <font class="tag">approval_list: </font
-      ><el-select v-model="approval_list_length" placeholder="approval_list">
-        <el-option
-          v-for="item in options2"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value"
-        >
-        </el-option>
-      </el-select>
-    </el-col>
-    <div>
-      <listitem
-        v-for="(approval_list_item, index) in contractProcessSteps_item.approval_list"
-        :key="index"
-        :index="index"
-        :approval_list_item="approval_list_item"
-        @deleteIndex="del"
-        @uploadDatalistitem="getData"
-      >
+    <el-row :gutter="20">
+      <el-col :span="6">
+        <span class="tag">step_type: </span>
+        <el-select v-model="contractProcessSteps_item.step_type" placeholder="step_type">
+          <el-option v-for="i in options1" :key="i.value" :label="i.label" :value="i.value">
+          </el-option>
+        </el-select>
+      </el-col>
+      <el-col :span="6">
+        <span class="tag">approval_list: </span>
+        <el-select v-model="approval_list_length" placeholder="approval_list">
+          <el-option v-for="item in options2" :key="item.value" :label="item.label"
+            :value="item.value">
+          </el-option>
+        </el-select>
+      </el-col>
+    </el-row>
+    <hr width="80%" color="red" size="3">
+    <el-row>
+      <listitem v-for="(
+          approval_list_item, index
+        ) in contractProcessSteps_item.approval_list" :key="index" :index="index"
+        :approval_list_item="approval_list_item" @deleteIndex="del" @uploadDatalistitem="getData">
       </listitem>
-    </div>
-  </el-row>
+    </el-row>
+
+  </div>
 </template>
 
 <script>
@@ -55,8 +47,6 @@ export default {
   },
   data() {
     return {
-      step_type:1
-      ,
       options1: [
         {
           value: 1,
@@ -101,7 +91,7 @@ export default {
           label: "5",
         },
       ],
-      approval_list:[]
+      approval_list: [],
     };
   },
   watch: {
@@ -138,7 +128,8 @@ export default {
       },
       set: function (val) {
         console.log("val :>> ", val);
-        let approval_list_length = this.contractProcessSteps_item.approval_list.length;
+        let approval_list_length =
+          this.contractProcessSteps_item.approval_list.length;
         if (val > approval_list_length) {
           for (let i = approval_list_length; i < val; i++) {
             this.contractProcessSteps_item.approval_list.push({
@@ -148,9 +139,13 @@ export default {
             });
           }
         } else {
-          this.contractProcessSteps_item.approval_list = this.contractProcessSteps_item.approval_list.slice(0, val);
+          this.contractProcessSteps_item.approval_list =
+            this.contractProcessSteps_item.approval_list.slice(0, val);
         }
-        console.log("this.approval_list :>> ", this.contractProcessSteps_item.approval_list.length);
+        console.log(
+          "this.approval_list :>> ",
+          this.contractProcessSteps_item.approval_list.length
+        );
       },
     },
   },
