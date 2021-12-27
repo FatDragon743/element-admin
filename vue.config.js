@@ -31,8 +31,8 @@ module.exports = {
     },
     proxy: {
       '/admin': {
-        // target: `http://localhost:${port}/mock`,
-        target: 'http://localhost:8080',
+        target: `http://localhost:${port}/mock`,
+        // target: 'http://localhost:8080',
         changeOrigin: true,
         pathRewrite: {
           '^/' : '/'

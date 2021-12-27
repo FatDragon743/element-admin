@@ -14,7 +14,14 @@ export default {
   },
   loginByLoginName: config => {
     console.log(config)
-    const params = JSON.parse(config.body)
+    var obj = {}, arr = config.body.split('&');
+        for (var i = 0; i < arr.length; i++) {
+            var subArr = arr[i].split('=');
+            var key = decodeURIComponent(subArr[0]);
+            var value = decodeURIComponent(subArr[1]);
+            obj[key] = value;
+        }
+    const params = obj;
     let token = null
     if ('' + captcha !== '' + params.captcha) {
       return {
