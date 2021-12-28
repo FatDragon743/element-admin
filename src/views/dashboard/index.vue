@@ -22,8 +22,8 @@
     <!-- //==================================================================================cc_list -->
     <hr width="100%" color="#987cb9" size="3">
     <h1> cc_list</h1>
-    <cclist v-for="(item, index) in Bjson.cc_list" :key="'B'+index" :index="index" :cc_list_item="item"
-      @deleteIndex="del" @upload_cc_list_item="getDatacclist">
+    <cclist v-for="(item, index) in Bjson.cc_list" :key="'B'+index" :index="index"
+      :cc_list_item="item" @deleteIndex="del" @upload_cc_list_item="getDatacclist">
     </cclist>
     <!-- //==================================================================================cpid -->
     <hr width="100%" color="#987cb9" size="3">
@@ -34,6 +34,7 @@
         <el-input v-model="Bjson.cpid" placeholder="name" style="width:70%">
         </el-input>
       </el-col>
+      <el-button type="primary" icon="el-icon-refresh" @click="randomString"></el-button>
     </el-row>
     <!-- //==================================================================================oId -->
     <hr width="100%" color="#987cb9" size="3">
@@ -64,7 +65,7 @@
         <el-input v-model="Bjson.create_time" placeholder="name" style="width:70%">
         </el-input>
       </el-col>
-      <el-button type="primary" icon="el-icon-refresh-left" @click="getNow('create_time')">
+      <el-button type="primary" icon="el-icon-refresh" @click="getNow('create_time')">
       </el-button>
     </el-row>
     <!-- //==================================================================================update_time -->
@@ -77,7 +78,7 @@
         </el-input>
 
       </el-col>
-      <el-button type="primary" icon="el-icon-refresh-left" @click="getNow('update_time')">
+      <el-button type="primary" icon="el-icon-refresh" @click="getNow('update_time')">
       </el-button>
     </el-row>
 
@@ -166,6 +167,11 @@ export default {
           }
           return '<span class="' + cls + '">' + match + "</span>";
         }
+      );
+    },
+    randomString: function () {
+      this.Bjson.cpid =  (Date.now() * 1000 + Math.floor(Math.random() * 1000)).toString(
+        36
       );
     },
     addContractProcessStep: function () {
